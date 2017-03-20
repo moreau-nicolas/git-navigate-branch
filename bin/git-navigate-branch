@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+GIT_OPTS=""
+OUTPUT_FILTER="cat" # no-op
+
+function usage() {
+    echo ""
+    echo "git navigate-branch [BRANCH]"
+    echo ""
+    echo "  See 'man git-navigate-branch' for further information"
+}
+
+# actually parse the options and do stuff
+while [[ $1 = -?* ]]; do
+    case $1 in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *) ;;
+    esac
+shift
+done
+
+BRANCH=${1:-$(git rev-parse --abbrev-ref HEAD)}
+
+git config --local alias.prev "checkout HEAD^1"
+git config --local alias.next "!sh -c 'git log --reverse --pretty=%H ${BRANCH} | awk \"/\$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+git config --local alias.last "checkout ${BRANCH}"
+git config --local alias.first "!sh -c 'git checkout \$(git rev-list --reverse ${BRANCH} | head -1)'"

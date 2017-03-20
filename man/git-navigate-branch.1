@@ -1,0 +1,29 @@
+.\" Manpage for git-navigate-branch
+.TH man 1 "March 2017" "0.1" "git navigate-branch man page"
+.SH NAME
+git navigate-branch \- Setup local git aliasesa to allow for navigation along a given git branch
+.SH SYNOPSIS
+git navigate-branch [BRANCH]
+.SH DESCRIPTION
+Create the following local git aliases to navigate along the selected BRANCH.
+If BRANCH is omitted, defaults to the current branch.
+.TP
+.I git first
+Go to the root commit on the selected branch
+.TP
+.I git prev
+Go to the previous commit on the selected branch
+.TP
+.I git next
+Go to the next commit on the selected branch
+.TP
+.I git last
+Go to the last commit on the selected branch
+.SH OPTIONS
+No options.
+.SH SEE ALSO
+https://coderwall.com/p/ok-iyg/git-prev-next
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Nicolas Moreau <moreau-nicolas@users.noreply.github.com>
